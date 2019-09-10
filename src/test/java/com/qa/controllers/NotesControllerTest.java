@@ -62,10 +62,22 @@ public class NotesControllerTest {
     }
     @Test
     public void testCreateNote(){
+        Note note = new Note();
+        note.setName("stuff");
+
+        when(repository.saveAndFlush(note)).thenReturn(note);
+
+        assertEquals(notesController.addNote(note).getName(),"stuff");
 
     }
     @Test
     public void testDeleteNote(){
+        Note note = new Note();
+        note.setName("nuyce");
+
+        when(repository.findOne(0L)).thenReturn(note);
+
+        assertEquals(notesController.deleteNote(0L).getName(),"nuyce");
 
     }
 }
